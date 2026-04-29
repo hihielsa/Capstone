@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Capstone Midterm Progress Presentation</title>
+  <style>
+    :root{
+      --bg:#0f172a;
+      --panel:#111827;
+      --ink:#f8fafc;
+      --muted:#cbd5e1;
+      --soft:#e2e8f0;
+      --accent:#38bdf8;
+      --accent2:#a78bfa;
+      --green:#34d399;
+      --orange:#fbbf24;
+      --red:#fb7185;
+      --card:#ffffff;
+      --text:#0f172a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      background:#020617;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color:var(--ink);
+      overflow:hidden;
+    }
+    .deck{width:100vw;height:100vh;position:relative;}
+    .slide{
+      width:100vw;height:100vh;padding:5.2vh 6.5vw;display:none;position:absolute;inset:0;
+      background: radial-gradient(circle at top right, rgba(56,189,248,.22), transparent 30%),
+                  radial-gradient(circle at bottom left, rgba(167,139,250,.2), transparent 35%),
+                  linear-gradient(135deg,#0f172a,#111827 55%,#020617);
+    }
+    .slide.active{display:flex;flex-direction:column;justify-content:center;}
+    h1{font-size:clamp(48px,6.5vw,86px);line-height:.98;margin:0 0 20px;font-weight:850;letter-spacing:-.05em;}
+    h2{font-size:clamp(34px,4.2vw,58px);line-height:1.05;margin:0 0 30px;font-weight:820;letter-spacing:-.035em;}
+    h3{font-size:clamp(22px,2.1vw,32px);margin:0 0 12px;color:var(--soft)}
+    p{font-size:clamp(19px,1.55vw,27px);line-height:1.45;color:var(--muted);margin:0 0 18px;max-width:1050px;}
+    .kicker{color:var(--accent);font-weight:800;text-transform:uppercase;letter-spacing:.16em;font-size:15px;margin-bottom:22px;}
+    .subtitle{font-size:clamp(23px,2.1vw,34px);max-width:1040px;color:#e5e7eb;}
+    .footer{position:absolute;bottom:24px;left:6.5vw;right:6.5vw;display:flex;justify-content:space-between;color:#94a3b8;font-size:14px;}
+    .progress{position:absolute;left:0;bottom:0;height:5px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .2s ease;}
+    .grid{display:grid;gap:24px;}
+    .grid.two{grid-template-columns:1fr 1fr;align-items:stretch;}
+    .grid.three{grid-template-columns:repeat(3,1fr);}
+    .card{
+      background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.13);border-radius:28px;padding:28px 30px;backdrop-filter: blur(12px);
+      min-height:160px;
+    }
+    .card.light{background:rgba(255,255,255,.94);color:var(--text);border:0;box-shadow:0 20px 60px rgba(0,0,0,.22)}
+    .card.light p,.card.light li{color:#334155}
+    .metric{font-size:clamp(42px,5vw,68px);font-weight:850;letter-spacing:-.05em;color:#fff;margin-bottom:8px;}
+    .label{font-size:19px;color:#cbd5e1;line-height:1.35}
+    ul{margin:8px 0 0;padding-left:23px;color:#dbeafe;font-size:clamp(18px,1.35vw,24px);line-height:1.45;}
+    li{margin:10px 0;}
+    .pill{display:inline-flex;align-items:center;gap:8px;border-radius:999px;padding:9px 14px;background:rgba(56,189,248,.16);color:#e0f2fe;font-weight:750;margin:8px 8px 0 0;font-size:16px;border:1px solid rgba(56,189,248,.25)}
+    .timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:18px;}
+    .step{position:relative;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:24px;padding:24px;min-height:180px;}
+    .num{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#082f49;font-weight:900;margin-bottom:16px;}
+    .step h3{font-size:24px;color:#fff;margin-bottom:10px}.step p{font-size:18px;line-height:1.35}
+    .status{display:grid;grid-template-columns:1.1fr 1fr;gap:28px;align-items:center;}
+    .bigcheck{font-size:70px;line-height:1;color:var(--green);}
+    .badge{font-size:15px;text-transform:uppercase;letter-spacing:.1em;color:#0f172a;background:#e0f2fe;border-radius:999px;padding:8px 12px;font-weight:850;display:inline-block;margin-bottom:15px;}
+    .riskbox{border-left:7px solid var(--orange);padding-left:25px;margin-top:10px;}
+    .small{font-size:16px;color:#94a3b8;}
+    .diagram{display:grid;grid-template-columns:1fr 65px 1fr 65px 1fr;align-items:center;margin-top:30px;}
+    .node{background:rgba(255,255,255,.93);color:#0f172a;border-radius:28px;padding:28px;text-align:center;min-height:190px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 25px 70px rgba(0,0,0,.23)}
+    .node h3{color:#0f172a;font-size:28px}.node p{color:#475569;font-size:18px;margin-bottom:0}.arrow{text-align:center;font-size:44px;color:var(--accent);font-weight:900}
+    .safe{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:14px;}
+    .yes{border-top:6px solid var(--green)}.no{border-top:6px solid var(--red)}
+    .center{align-items:center;text-align:center}.center p{margin-left:auto;margin-right:auto}.center .pill{justify-content:center}
+    @media print{
+      body{overflow:visible;background:white}.deck{height:auto}.slide{display:flex!important;position:relative;page-break-after:always;width:100vw;height:56.25vw;max-height:100vh;color:white}.footer,.progress{display:none}
+    }
+  </style>
+</head>
+<body>
+  <main class="deck">
+    <section class="slide active center">
+      <div class="kicker">Capstone Midterm Progress</div>
+      <h1>Cross-Sell Recommendation Framework</h1>
+      <p class="subtitle">A privacy-safe progress update on our use case, current status, upcoming milestones, and project risks.</p>
+      <div style="margin-top:30px">
+        <span class="pill">Professional services context</span>
+        <span class="pill">Recommendation modeling</span>
+        <span class="pill">Leadership-ready insights</span>
+      </div>
+      <div class="footer"><span>Team Progress Presentation</span><span>Slide <b class="slideNo">1</b>/7</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Project Use Case</div>
+      <h2>Helping the partner identify smart cross-sell opportunities</h2>
+      <div class="grid two">
+        <div class="card light">
+          <span class="badge">Business question</span>
+          <h3 style="color:#0f172a">Which existing clients are most likely to benefit from additional service lines?</h3>
+          <p>Our project focuses on turning historical client, engagement, and business context into actionable recommendations for sales, business development, and leadership teams.</p>
+        </div>
+        <div class="card">
+          <div class="metric">~16K</div>
+          <div class="label">active client relationships discussed as the potential recommendation population</div>
+          <ul>
+            <li>Prioritize high-value opportunities</li>
+            <li>Support strategic growth conversations</li>
+            <li>Present insights in a business-friendly format</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer"><span>NDA-safe: no raw data or client records shown</span><span>Slide <b class="slideNo">2</b>/7</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">What We Learned</div>
+      <h2>We now understand the high-level data landscape</h2>
+      <p>The client walked us through how the data is structured and how different data categories relate to the business goal.</p>
+      <div class="grid three" style="margin-top:24px">
+        <div class="card"><h3>Client Profile</h3><p>Industry, geography, company size, lifecycle, and relationship history.</p></div>
+        <div class="card"><h3>Engagement Activity</h3><p>Service-line history, project/engagement patterns, and cross-sell signals.</p></div>
+        <div class="card"><h3>Domo Platform Context</h3><p>The client uses Domo as a centralized BI platform to support data integration, dashboarding, and business decision-making.</p></div>
+      </div>
+      <div style="margin-top:26px">
+        <span class="pill">Data access pending</span><span class="pill">Domo access granted</span><span class="pill">Business context clarified</span>
+      </div>
+      <div class="footer"><span>Presented at a category level only</span><span>Slide <b class="slideNo">3</b>/7</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Current Status</div>
+      <h2>Progress is strongest on onboarding and business understanding</h2>
+      <div class="status">
+        <div class="card light">
+          <div class="bigcheck">✓</div>
+          <h3 style="color:#0f172a">Completed so far</h3>
+          <ul>
+            <li>NDA process completed to support secure onboarding.</li>
+            <li>Second client meeting held via video call.</li>
+            <li>Team received a deeper overview of the data structure and business use case.</li>
+            <li>Domo platform access granted for environment familiarization.</li>
+            <li>Client clarified what insights would be useful for senior leadership.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>In progress</h3>
+          <ul>
+            <li>Preparing for data onboarding.</li>
+            <li>Exploring the Domo environment to understand its structure and functionality.</li>
+            <li>Mapping initial EDA steps and drafting a recommendation-model framework before data access begins.</li>
+          </ul>
+          <p class="small" style="margin-top:20px">Next client meeting: scheduled for 4/30 to begin preliminary dataset onboarding.</p>
+        </div>
+      </div>
+      <div class="footer"><span>Status update</span><span>Slide <b class="slideNo">4</b>/7</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Proposed Analytical Approach</div>
+      <h2>From client data to usable recommendations</h2>
+      <div class="diagram">
+        <div class="node"><h3>1. Prepare Data</h3><p>Clean, validate, and organize client-level features after access is granted.</p></div>
+        <div class="arrow">→</div>
+        <div class="node"><h3>2. Model Opportunity</h3><p>Explore classification, ranking, or recommendation approaches based on data quality.</p></div>
+        <div class="arrow">→</div>
+        <div class="node"><h3>3. Deliver Insights</h3><p>Generate top recommendations with simple explanations that can align with Domo-based reporting.</p></div>
+      </div>
+      <p style="margin-top:32px">The goal is not only to predict, but to make recommendations explainable and useful within the client’s existing BI environment.</p>
+      <div class="footer"><span>Framework before modeling</span><span>Slide <b class="slideNo">5</b>/7</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Upcoming Tasks & Milestones</div>
+      <h2>Next phase: move from onboarding to analysis</h2>
+      <div class="timeline">
+        <div class="step"><div class="num">1</div><h3>Data Access</h3><p>Complete onboarding and receive the preliminary dataset.</p></div>
+        <div class="step"><div class="num">2</div><h3>EDA</h3><p>Assess missingness, distributions, target definitions, and usable business signals.</p></div>
+        <div class="step"><div class="num">3</div><h3>Modeling</h3><p>Build an initial predictive or ranking-based recommendation model.</p></div>
+        <div class="step"><div class="num">4</div><h3>Presentation</h3><p>Share preliminary findings, limitations, and next-step recommendations.</p></div>
+      </div>
+      <div class="footer"><span>Upcoming work plan</span><span>Slide <b class="slideNo">6</b>/7</span></div>
+    </section>
+
+    <section class="slide">
+      <div class="kicker">Challenges, Risks & NDA-Safe Reporting</div>
+      <h2>Main risk: delayed data access compresses the timeline</h2>
+      <div class="grid two">
+        <div class="card">
+          <h3>Risk & Impact</h3>
+          <div class="riskbox">
+            <p>Delayed access means less time for EDA, modeling, validation, and refinement.</p>
+          </div>
+          <h3 style="margin-top:28px">Mitigation</h3>
+          <ul>
+            <li>Prepare modeling framework in advance.</li>
+            <li>Define initial EDA checklist.</li>
+            <li>Keep deliverables focused and realistic.</li>
+          </ul>
+        </div>
+        <div class="card light">
+          <h3 style="color:#0f172a">NDA-safe presentation rule</h3>
+          <div class="safe">
+            <div class="card yes" style="background:#f8fafc"><h3 style="color:#0f172a">Share</h3><p>Use case, methodology, data categories, project status, risks.</p></div>
+            <div class="card no" style="background:#f8fafc"><h3 style="color:#0f172a">Do not share</h3><p>Raw data, screenshots, client records, exact sensitive values, proprietary details.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="footer"><span>Risk management</span><span>Slide <b class="slideNo">7</b>/7</span></div>
+    </section>
+
+    <div class="progress" id="progress"></div>
+  </main>
+
+  <script>
+    const slides = [...document.querySelectorAll('.slide')];
+    let idx = 0;
+    function show(i){
+      idx = Math.max(0, Math.min(slides.length - 1, i));
+      slides.forEach((s,j)=>s.classList.toggle('active', j===idx));
+      document.getElementById('progress').style.width = `${((idx+1)/slides.length)*100}%`;
+    }
+    document.addEventListener('keydown', e => {
+      if(['ArrowRight','PageDown',' '].includes(e.key)) show(idx+1);
+      if(['ArrowLeft','PageUp'].includes(e.key)) show(idx-1);
+      if(e.key==='Home') show(0);
+      if(e.key==='End') show(slides.length-1);
+    });
+    document.addEventListener('click', () => show(idx+1));
+    show(0);
+  </script>
+</body>
+</html>
