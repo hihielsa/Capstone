@@ -1,10 +1,11 @@
-<!doctype html>
+<!DOCTYPE html>
+
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Capstone Midterm Progress Presentation</title>
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Capstone Midterm Progress Presentation</title>
+<style>
     :root{
       --bg:#0f172a;
       --panel:#111827;
@@ -78,66 +79,95 @@
   </style>
 </head>
 <body>
-  <main class="deck">
-    <section class="slide active center">
-      <div class="kicker">Capstone Midterm Progress</div>
-      <h1>Cross-Sell Recommendation Framework</h1>
-      <p class="subtitle">A privacy-safe progress update on our use case, current status, upcoming milestones, and project risks.</p>
-      <div style="margin-top:30px">
-        <span class="pill">Professional services context</span>
-        <span class="pill">Recommendation modeling</span>
-        <span class="pill">Leadership-ready insights</span>
-      </div>
-      <div class="footer"><span>Team Progress Presentation</span><span>Slide <b class="slideNo">1</b>/5</span></div>
-    </section>
+<main class="deck">
+<section class="slide active center">
+<div class="kicker">Capstone Midterm Progress</div>
+<h1>Cross-Sell Recommendation Framework</h1>
+<p class="subtitle">A privacy-safe progress update on our use case, current status, upcoming milestones, and project risks.</p>
+<div style="margin-top:30px">
+<span class="pill">Professional services context</span>
+<span class="pill">Recommendation modeling</span>
+<span class="pill">Leadership-ready insights</span>
+</div>
+<div class="footer"><span>Team Progress Presentation</span><span>Slide <b class="slideNo">1</b>/5</span></div>
+</section>
+<section class="slide">
+<div class="kicker">Project Use Case</div>
+<h2>Helping the partner identify smart cross-sell opportunities</h2>
+<div class="grid two">
+<div class="card light">
+<span class="badge">Business question</span>
+<h3 style="color:#0f172a">Which existing clients are most likely to benefit from additional service lines?</h3>
+<p>Our project focuses on turning historical client, engagement, and business context into actionable recommendations for sales, business development, and leadership teams.</p>
+</div>
+<div class="card">
+<div class="metric">~16K</div>
+<div class="label">active client relationships discussed as the potential recommendation population</div>
+<ul>
+<li>Prioritize high-value opportunities</li>
+<li>Support strategic growth conversations</li>
+<li>Present insights in a business-friendly format</li>
+</ul>
+</div>
+</div>
+<div class="footer"><span>NDA-safe: no raw data or client records shown</span><span>Slide <b class="slideNo">2</b>/5</span></div>
+</section>
+<section class="slide">
+<div class="kicker">What We Learned</div>
+<h2>We now understand the high-level data landscape</h2>
+<p>The client walked us through how the data is structured and how different data categories relate to the business goal.</p>
+<div class="grid three" style="margin-top:24px">
+<div class="card"><h3>Client Profile</h3><p>Industry, geography, company size, lifecycle, and relationship history.</p></div>
+<div class="card"><h3>Engagement Activity</h3><p>Service-line history, project/engagement patterns, and cross-sell signals.</p></div>
+<div class="card"><h3>Business Context</h3><p>Sales, referral, and leadership perspectives on what makes a recommendation useful.</p></div>
+</div>
+<div style="margin-top:26px">
+<span class="pill">Data access pending</span><span class="pill">Model design started</span><span class="pill">Business context clarified</span>
+</div>
+<div class="footer"><span>Presented at a category level only</span><span>Slide <b class="slideNo">3</b>/5</span></div>
+</section>
 
-    
 
-    
-
-    <section class="slide">
-      <div class="kicker">Upcoming Tasks & Milestones</div>
-      <h2>Next phase: move from onboarding to analysis</h2>
-      <div class="timeline">
-        <div class="step"><div class="num">1</div><h3>Data Access</h3><p>Complete onboarding and receive the preliminary dataset.</p></div>
-        <div class="step"><div class="num">2</div><h3>EDA</h3><p>Assess missingness, distributions, target definitions, and usable business signals.</p></div>
-        <div class="step"><div class="num">3</div><h3>Modeling</h3><p>Build an initial predictive or ranking-based recommendation model.</p></div>
-        <div class="step"><div class="num">4</div><h3>Presentation</h3><p>Share preliminary findings, limitations, and next-step recommendations.</p></div>
-      </div>
-      <div class="footer"><span>Upcoming work plan</span><span>Slide <b class="slideNo">6</b>/5</span></div>
-    </section>
-
-    <section class="slide">
-      <div class="kicker">Challenges, Risks & NDA-Safe Reporting</div>
-      <h2>Main risk: delayed data access compresses the timeline</h2>
-      <div class="grid two">
-        <div class="card">
-          <h3>Risk & Impact</h3>
-          <div class="riskbox">
-            <p>Delayed access means less time for EDA, modeling, validation, and refinement.</p>
-          </div>
-          <h3 style="margin-top:28px">Mitigation</h3>
-          <ul>
-            <li>Prepare modeling framework in advance.</li>
-            <li>Define initial EDA checklist.</li>
-            <li>Keep deliverables focused and realistic.</li>
-          </ul>
-        </div>
-        <div class="card light">
-          <h3 style="color:#0f172a">NDA-safe presentation rule</h3>
-          <div class="safe">
-            <div class="card yes" style="background:#f8fafc"><h3 style="color:#0f172a">Share</h3><p>Use case, methodology, data categories, project status, risks.</p></div>
-            <div class="card no" style="background:#f8fafc"><h3 style="color:#0f172a">Do not share</h3><p>Raw data, screenshots, client records, exact sensitive values, proprietary details.</p></div>
-          </div>
-        </div>
-      </div>
-      <div class="footer"><span>Risk management</span><span>Slide <b class="slideNo">7</b>/5</span></div>
-    </section>
-
-    <div class="progress" id="progress"></div>
-  </main>
-
-  <script>
+<section class="slide">
+<div class="kicker">Upcoming Tasks &amp; Milestones</div>
+<h2>Next phase: move from onboarding to analysis</h2>
+<div class="timeline">
+<div class="step"><div class="num">1</div><h3>Data Access</h3><p>Complete onboarding and receive the preliminary dataset.</p></div>
+<div class="step"><div class="num">2</div><h3>EDA</h3><p>Assess missingness, distributions, target definitions, and usable business signals.</p></div>
+<div class="step"><div class="num">3</div><h3>Modeling</h3><p>Build an initial predictive or ranking-based recommendation model.</p></div>
+<div class="step"><div class="num">4</div><h3>Presentation</h3><p>Share preliminary findings, limitations, and next-step recommendations.</p></div>
+</div>
+<div class="footer"><span>Upcoming work plan</span><span>Slide <b class="slideNo">4</b>/5</span></div>
+</section>
+<section class="slide">
+<div class="kicker">Challenges, Risks &amp; NDA-Safe Reporting</div>
+<h2>Main risk: delayed data access compresses the timeline</h2>
+<div class="grid two">
+<div class="card">
+<h3>Risk &amp; Impact</h3>
+<div class="riskbox">
+<p>Delayed access means less time for EDA, modeling, validation, and refinement.</p>
+</div>
+<h3 style="margin-top:28px">Mitigation</h3>
+<ul>
+<li>Prepare modeling framework in advance.</li>
+<li>Define initial EDA checklist.</li>
+<li>Keep deliverables focused and realistic.</li>
+</ul>
+</div>
+<div class="card light">
+<h3 style="color:#0f172a">NDA-safe presentation rule</h3>
+<div class="safe">
+<div class="card yes" style="background:#f8fafc"><h3 style="color:#0f172a">Share</h3><p>Use case, methodology, data categories, project status, risks.</p></div>
+<div class="card no" style="background:#f8fafc"><h3 style="color:#0f172a">Do not share</h3><p>Raw data, screenshots, client records, exact sensitive values, proprietary details.</p></div>
+</div>
+</div>
+</div>
+<div class="footer"><span>Risk management</span><span>Slide <b class="slideNo">5</b>/5</span></div>
+</section>
+<div class="progress" id="progress"></div>
+</main>
+<script>
     const slides = [...document.querySelectorAll('.slide')];
     let idx = 0;
     function show(i){
